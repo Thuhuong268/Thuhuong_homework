@@ -153,6 +153,115 @@
             echo("$email không là địa chỉ email hơp lệ");
 	}
 
+    echo '<br>';
+    //PART3
+//1.Viết chương trình in ra màn hình số chẵn <21
+    for ($a=2; $a<21; $a+=2){
+        echo $a. "<br>";
+    }
+//2.Viết chương trình kiểm tra số nguyên tố
+    //Bai 2
+    $a = 4;
+    $check = 1;
+    if($a<=1){
+        echo "khong la so nguyen to";
+        $check = -1;
+    }
+    if ($a == 2)
+    {
+        echo "La so nguyen to";
+        $check = -1;
+    }
+    else
+    {
+        for ($i=2; $i<$a;$i++)
+        {
+            if ($a% $i == 0)
+            {
+                $check = 0;
+            }
+        }
+    }
+    if ($check==1){
+        echo "la so nguyen to";
+    }
+    else if($check==0){
+        echo "Khong la so nguyen to";
+    }
+
+//3.
+    echo"<br>";
+//4. Viết Function(hàm) để tính trung bình cộng của một mảng số nguyên
+    function trungbinhcong($mang){
+        if(count($mang)== 0){
+            $tong = array_sum($mang);
+            $trungbinhcong = $tong / count($mang);
+            return $trungbinhcong;
+        }
+    }
+        $a= array(1,2,3,4,5,6,7,8,9,10);
+        echo "Trung binh cong cua mang la: ".trungbinhcong($a);
+    echo'<br>';
+//5. Khởi tạo mảng kết hợp danh sách lớp 1, sau đó dùng hàm random in ra STT kèm tên
+    $students = [
+        500 => 'Nguyen Van A',
+        501 => 'Nguyen Van B',
+        3 => 'Nguyen Van C',
+        4 => 'Nguyen Van D',
+        5 => 'Nguyen Van E'
+    ];
+
+    $STT = array_rand($students);
+    echo "STT: " . $STT . " Ho và tên: " . $students[$STT];
+    echo "<br>";
+
+    //PART 5
+   
+$dbh = mysqli_connect('localhost', 'root', '', 'melodyj');
+// Kết nối tới MySQL server
+
+if (!$dbh)
+    die("Unable to connect to MySQL: " . mysqli_connect_error());
+// Nếu kết nối thất bại thì đưa ra thông báo lỗi
+
+$sql_stmt = "SELECT * FROM my_contacts";
+// Câu lệnh select
+
+$result = mysqli_query($dbh, $sql_stmt);
+// Thực thi câu lệnh SQL
+
+if (!$result)
+    die("Database access failed: " . mysqli_connect_error());
+// Thông báo lỗi nếu thực thi thất bại
+
+$rows = mysqli_num_rows($result);
+// Lấy số hàng trả về
+
+if ($rows) {
+    while ($row = mysqli_fetch_array($result)) {
+        echo 'ID: ' . $row['id'] . '<br>';
+        echo 'Full Names: ' . $row['full_names'] . '<br>';
+        echo 'Gender: ' . $row['gender'] . '<br>';
+        echo 'Contact No: ' . $row['contact_no'] . '<br>';
+        echo 'Email: ' . $row['email'] . '<br>';
+        echo 'City: ' . $row['city'] . '<br>';
+        echo 'Country: ' . $row['country'] . '<br><br>';
+    }
+}
+
+mysqli_close($dbh); // Đóng kết nối CSDL
+    
+ /*$ID = "";
+    $FullNames = 'Zeus';
+    $Gender = 'Male';
+    $ContactNo = 111;
+    $Email = 'zeus@olympus.mt.co';
+    $City = 'Agos';
+    $Country = 'Greece';
+
+    $sql2 = " INSERT INTO Bang1 ( ID, FullNames, Gender, ContactNo, Email, City, Country )
+    VALUES('$ID' , '$FullNames' , '$Gender' , '$ContactNo' , '$Email' , '$City' , '$Country') ";
+*/
     ?>
 
 </body>
