@@ -79,4 +79,56 @@ echo '<br>';
     $sql4 = " DELETE FROM Bang1 WHERE ID='1' ";
     mysqLi_query( $conn, $sql4 );
 
+// POD
+$dbh = mysqli_connect('localhost', 'root', '', 'melodyj');
+// Kết nối tới MySQL server
+
+if (!$dbh)
+    die("Unable to connect to MySQL: " . mysqli_connect_error());
+// Nếu kết nối thất bại thì đưa ra thông báo lỗi
+// Thêm dữ liệu
+$sql_pod = "INSERT INTO your_table (column1, column2) VALUES (:value1, :value2)";
+$stmt = $conn->prepare($sql);
+
+$stmt->bindParam(':value1', $value1);
+$stmt->bindParam(':value2', $value2);
+
+$value1 = "John Doe";
+$value2 = "johndoe@example.com";
+
+$stmt->execute();
+echo "Thêm dữ liệu thành công";
+
+//Cập nhật dữ liệu
+$sql_pod = "UPDATE your_table SET column1 = :new_value WHERE id = :id";
+$stmt = $conn->prepare($sql);
+
+$stmt->bindParam(':new_value', $new_value);
+$stmt->bindParam(':id', $id);
+
+$new_value = "New Value";
+$id = 1;
+
+$stmt->execute();
+echo "Cập nhật dữ liệu thành công";
+
+// Xóa dữ liệu
+$sql_pod = "DELETE FROM your_table WHERE id = :id";
+$stmt = $conn->prepare($sql);
+
+$stmt->bindParam(':id', $id);
+
+$id = 1;
+
+$stmt->execute();
+echo "Xóa dữ liệu thành công";
+
+// Hiển thị dữ liệu 
+$sql_pod = "SELECT * FROM your_table";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+
+while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    echo "id: " . $row["id"] . " - Name: " . $row["name"] . "<br>"
+}
 ?>
